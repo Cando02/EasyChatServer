@@ -1,21 +1,9 @@
-# Build files
 build/
-CMakeCache.txt
-CMakeFiles/
-*.cmake
-*.so
 *.o
-*.out
-EasyChatServer
-
-# IDE files
+*.a
+*.so
+logs/*.log
+config/server.conf.local
 .idea/
-.vscode/
 *.swp
-*.swo
-
-# Log files
-logs/
-
-# Configuration files
-config/*.conf
+*~
