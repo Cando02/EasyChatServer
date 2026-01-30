@@ -33,6 +33,7 @@ file(GLOB_RECURSE COMMON_SOURCES "src/common/*.cpp")
 file(GLOB_RECURSE NETWORK_SOURCES "src/network/*.cpp")
 file(GLOB_RECURSE THREADPOOL_SOURCES "src/threadpool/*.cpp")
 file(GLOB_RECURSE DATABASE_SOURCES "src/database/*.cpp")
+file(GLOB_RECURSE BUSINESS_SOURCES "src/business/*.cpp")
 
 # 查找线程库
 find_package(Threads REQUIRED)
@@ -45,12 +46,8 @@ add_executable(EasyChatServer
         ${NETWORK_SOURCES}
         ${THREADPOOL_SOURCES}
         ${DATABASE_SOURCES}
-        include/business/user_manager.h
-        src/business/user_manager.cpp
-        include/business/message_handler.h
-        src/business/mesage_handler.cpp
-        include/network/reactor.h
-        src/network/reactor.cpp
+        ${BUSINESS_SOURCES}
+        src/common/logger.cpp
 )
 
 target_link_libraries(EasyChatServer

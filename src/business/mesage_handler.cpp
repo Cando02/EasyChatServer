@@ -86,7 +86,6 @@ namespace easychat{
         // 发送消息
         sendMessage(sender_id,receiver_id,message_content);
     }
-
     bool MessageHandler::getOfflineMessage(int user_id, std::vector<MessageInfo> &messages) {
         auto conn = conn_pool_.getConnection();
         if (!conn || !conn->isConnected()) return false;
