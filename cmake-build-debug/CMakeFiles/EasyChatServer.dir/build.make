@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cando/home/cando/Desktop/EasyChatServer
+CMAKE_SOURCE_DIR = /home/cando/EasyChatServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cando/home/cando/Desktop/EasyChatServer/cmake-build-debug
+CMAKE_BINARY_DIR = /home/cando/EasyChatServer/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/EasyChatServer.dir/depend.make
@@ -57,34 +57,171 @@ include CMakeFiles/EasyChatServer.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/EasyChatServer.dir/flags.make
 
-CMakeFiles/EasyChatServer.dir/main.cpp.o: CMakeFiles/EasyChatServer.dir/flags.make
-CMakeFiles/EasyChatServer.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cando/home/cando/Desktop/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/EasyChatServer.dir/main.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EasyChatServer.dir/main.cpp.o -c /home/cando/home/cando/Desktop/EasyChatServer/main.cpp
+CMakeFiles/EasyChatServer.dir/src/main.cpp.o: CMakeFiles/EasyChatServer.dir/flags.make
+CMakeFiles/EasyChatServer.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cando/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/EasyChatServer.dir/src/main.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EasyChatServer.dir/src/main.cpp.o -c /home/cando/EasyChatServer/src/main.cpp
 
-CMakeFiles/EasyChatServer.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EasyChatServer.dir/main.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cando/home/cando/Desktop/EasyChatServer/main.cpp > CMakeFiles/EasyChatServer.dir/main.cpp.i
+CMakeFiles/EasyChatServer.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EasyChatServer.dir/src/main.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cando/EasyChatServer/src/main.cpp > CMakeFiles/EasyChatServer.dir/src/main.cpp.i
 
-CMakeFiles/EasyChatServer.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EasyChatServer.dir/main.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cando/home/cando/Desktop/EasyChatServer/main.cpp -o CMakeFiles/EasyChatServer.dir/main.cpp.s
+CMakeFiles/EasyChatServer.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EasyChatServer.dir/src/main.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cando/EasyChatServer/src/main.cpp -o CMakeFiles/EasyChatServer.dir/src/main.cpp.s
+
+CMakeFiles/EasyChatServer.dir/src/common/protocol.cpp.o: CMakeFiles/EasyChatServer.dir/flags.make
+CMakeFiles/EasyChatServer.dir/src/common/protocol.cpp.o: ../src/common/protocol.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cando/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/EasyChatServer.dir/src/common/protocol.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EasyChatServer.dir/src/common/protocol.cpp.o -c /home/cando/EasyChatServer/src/common/protocol.cpp
+
+CMakeFiles/EasyChatServer.dir/src/common/protocol.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EasyChatServer.dir/src/common/protocol.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cando/EasyChatServer/src/common/protocol.cpp > CMakeFiles/EasyChatServer.dir/src/common/protocol.cpp.i
+
+CMakeFiles/EasyChatServer.dir/src/common/protocol.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EasyChatServer.dir/src/common/protocol.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cando/EasyChatServer/src/common/protocol.cpp -o CMakeFiles/EasyChatServer.dir/src/common/protocol.cpp.s
+
+CMakeFiles/EasyChatServer.dir/src/network/epoll.cpp.o: CMakeFiles/EasyChatServer.dir/flags.make
+CMakeFiles/EasyChatServer.dir/src/network/epoll.cpp.o: ../src/network/epoll.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cando/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/EasyChatServer.dir/src/network/epoll.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EasyChatServer.dir/src/network/epoll.cpp.o -c /home/cando/EasyChatServer/src/network/epoll.cpp
+
+CMakeFiles/EasyChatServer.dir/src/network/epoll.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EasyChatServer.dir/src/network/epoll.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cando/EasyChatServer/src/network/epoll.cpp > CMakeFiles/EasyChatServer.dir/src/network/epoll.cpp.i
+
+CMakeFiles/EasyChatServer.dir/src/network/epoll.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EasyChatServer.dir/src/network/epoll.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cando/EasyChatServer/src/network/epoll.cpp -o CMakeFiles/EasyChatServer.dir/src/network/epoll.cpp.s
+
+CMakeFiles/EasyChatServer.dir/src/network/reactor.cpp.o: CMakeFiles/EasyChatServer.dir/flags.make
+CMakeFiles/EasyChatServer.dir/src/network/reactor.cpp.o: ../src/network/reactor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cando/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/EasyChatServer.dir/src/network/reactor.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EasyChatServer.dir/src/network/reactor.cpp.o -c /home/cando/EasyChatServer/src/network/reactor.cpp
+
+CMakeFiles/EasyChatServer.dir/src/network/reactor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EasyChatServer.dir/src/network/reactor.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cando/EasyChatServer/src/network/reactor.cpp > CMakeFiles/EasyChatServer.dir/src/network/reactor.cpp.i
+
+CMakeFiles/EasyChatServer.dir/src/network/reactor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EasyChatServer.dir/src/network/reactor.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cando/EasyChatServer/src/network/reactor.cpp -o CMakeFiles/EasyChatServer.dir/src/network/reactor.cpp.s
+
+CMakeFiles/EasyChatServer.dir/src/network/socket.cpp.o: CMakeFiles/EasyChatServer.dir/flags.make
+CMakeFiles/EasyChatServer.dir/src/network/socket.cpp.o: ../src/network/socket.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cando/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/EasyChatServer.dir/src/network/socket.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EasyChatServer.dir/src/network/socket.cpp.o -c /home/cando/EasyChatServer/src/network/socket.cpp
+
+CMakeFiles/EasyChatServer.dir/src/network/socket.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EasyChatServer.dir/src/network/socket.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cando/EasyChatServer/src/network/socket.cpp > CMakeFiles/EasyChatServer.dir/src/network/socket.cpp.i
+
+CMakeFiles/EasyChatServer.dir/src/network/socket.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EasyChatServer.dir/src/network/socket.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cando/EasyChatServer/src/network/socket.cpp -o CMakeFiles/EasyChatServer.dir/src/network/socket.cpp.s
+
+CMakeFiles/EasyChatServer.dir/src/network/test.cpp.o: CMakeFiles/EasyChatServer.dir/flags.make
+CMakeFiles/EasyChatServer.dir/src/network/test.cpp.o: ../src/network/test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cando/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/EasyChatServer.dir/src/network/test.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EasyChatServer.dir/src/network/test.cpp.o -c /home/cando/EasyChatServer/src/network/test.cpp
+
+CMakeFiles/EasyChatServer.dir/src/network/test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EasyChatServer.dir/src/network/test.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cando/EasyChatServer/src/network/test.cpp > CMakeFiles/EasyChatServer.dir/src/network/test.cpp.i
+
+CMakeFiles/EasyChatServer.dir/src/network/test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EasyChatServer.dir/src/network/test.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cando/EasyChatServer/src/network/test.cpp -o CMakeFiles/EasyChatServer.dir/src/network/test.cpp.s
+
+CMakeFiles/EasyChatServer.dir/src/threadpool/theeadpool.cpp.o: CMakeFiles/EasyChatServer.dir/flags.make
+CMakeFiles/EasyChatServer.dir/src/threadpool/theeadpool.cpp.o: ../src/threadpool/theeadpool.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cando/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/EasyChatServer.dir/src/threadpool/theeadpool.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EasyChatServer.dir/src/threadpool/theeadpool.cpp.o -c /home/cando/EasyChatServer/src/threadpool/theeadpool.cpp
+
+CMakeFiles/EasyChatServer.dir/src/threadpool/theeadpool.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EasyChatServer.dir/src/threadpool/theeadpool.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cando/EasyChatServer/src/threadpool/theeadpool.cpp > CMakeFiles/EasyChatServer.dir/src/threadpool/theeadpool.cpp.i
+
+CMakeFiles/EasyChatServer.dir/src/threadpool/theeadpool.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EasyChatServer.dir/src/threadpool/theeadpool.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cando/EasyChatServer/src/threadpool/theeadpool.cpp -o CMakeFiles/EasyChatServer.dir/src/threadpool/theeadpool.cpp.s
+
+CMakeFiles/EasyChatServer.dir/src/database/connection_pool.cpp.o: CMakeFiles/EasyChatServer.dir/flags.make
+CMakeFiles/EasyChatServer.dir/src/database/connection_pool.cpp.o: ../src/database/connection_pool.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cando/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/EasyChatServer.dir/src/database/connection_pool.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EasyChatServer.dir/src/database/connection_pool.cpp.o -c /home/cando/EasyChatServer/src/database/connection_pool.cpp
+
+CMakeFiles/EasyChatServer.dir/src/database/connection_pool.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EasyChatServer.dir/src/database/connection_pool.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cando/EasyChatServer/src/database/connection_pool.cpp > CMakeFiles/EasyChatServer.dir/src/database/connection_pool.cpp.i
+
+CMakeFiles/EasyChatServer.dir/src/database/connection_pool.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EasyChatServer.dir/src/database/connection_pool.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cando/EasyChatServer/src/database/connection_pool.cpp -o CMakeFiles/EasyChatServer.dir/src/database/connection_pool.cpp.s
+
+CMakeFiles/EasyChatServer.dir/src/business/user_manager.cpp.o: CMakeFiles/EasyChatServer.dir/flags.make
+CMakeFiles/EasyChatServer.dir/src/business/user_manager.cpp.o: ../src/business/user_manager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cando/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/EasyChatServer.dir/src/business/user_manager.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EasyChatServer.dir/src/business/user_manager.cpp.o -c /home/cando/EasyChatServer/src/business/user_manager.cpp
+
+CMakeFiles/EasyChatServer.dir/src/business/user_manager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EasyChatServer.dir/src/business/user_manager.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cando/EasyChatServer/src/business/user_manager.cpp > CMakeFiles/EasyChatServer.dir/src/business/user_manager.cpp.i
+
+CMakeFiles/EasyChatServer.dir/src/business/user_manager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EasyChatServer.dir/src/business/user_manager.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cando/EasyChatServer/src/business/user_manager.cpp -o CMakeFiles/EasyChatServer.dir/src/business/user_manager.cpp.s
+
+CMakeFiles/EasyChatServer.dir/src/business/mesage_handler.cpp.o: CMakeFiles/EasyChatServer.dir/flags.make
+CMakeFiles/EasyChatServer.dir/src/business/mesage_handler.cpp.o: ../src/business/mesage_handler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cando/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/EasyChatServer.dir/src/business/mesage_handler.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/EasyChatServer.dir/src/business/mesage_handler.cpp.o -c /home/cando/EasyChatServer/src/business/mesage_handler.cpp
+
+CMakeFiles/EasyChatServer.dir/src/business/mesage_handler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/EasyChatServer.dir/src/business/mesage_handler.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cando/EasyChatServer/src/business/mesage_handler.cpp > CMakeFiles/EasyChatServer.dir/src/business/mesage_handler.cpp.i
+
+CMakeFiles/EasyChatServer.dir/src/business/mesage_handler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/EasyChatServer.dir/src/business/mesage_handler.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cando/EasyChatServer/src/business/mesage_handler.cpp -o CMakeFiles/EasyChatServer.dir/src/business/mesage_handler.cpp.s
 
 # Object files for target EasyChatServer
 EasyChatServer_OBJECTS = \
-"CMakeFiles/EasyChatServer.dir/main.cpp.o"
+"CMakeFiles/EasyChatServer.dir/src/main.cpp.o" \
+"CMakeFiles/EasyChatServer.dir/src/common/protocol.cpp.o" \
+"CMakeFiles/EasyChatServer.dir/src/network/epoll.cpp.o" \
+"CMakeFiles/EasyChatServer.dir/src/network/reactor.cpp.o" \
+"CMakeFiles/EasyChatServer.dir/src/network/socket.cpp.o" \
+"CMakeFiles/EasyChatServer.dir/src/network/test.cpp.o" \
+"CMakeFiles/EasyChatServer.dir/src/threadpool/theeadpool.cpp.o" \
+"CMakeFiles/EasyChatServer.dir/src/database/connection_pool.cpp.o" \
+"CMakeFiles/EasyChatServer.dir/src/business/user_manager.cpp.o" \
+"CMakeFiles/EasyChatServer.dir/src/business/mesage_handler.cpp.o"
 
 # External object files for target EasyChatServer
 EasyChatServer_EXTERNAL_OBJECTS =
 
-EasyChatServer: CMakeFiles/EasyChatServer.dir/main.cpp.o
-EasyChatServer: CMakeFiles/EasyChatServer.dir/build.make
-EasyChatServer: CMakeFiles/EasyChatServer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cando/home/cando/Desktop/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable EasyChatServer"
+bin/EasyChatServer: CMakeFiles/EasyChatServer.dir/src/main.cpp.o
+bin/EasyChatServer: CMakeFiles/EasyChatServer.dir/src/common/protocol.cpp.o
+bin/EasyChatServer: CMakeFiles/EasyChatServer.dir/src/network/epoll.cpp.o
+bin/EasyChatServer: CMakeFiles/EasyChatServer.dir/src/network/reactor.cpp.o
+bin/EasyChatServer: CMakeFiles/EasyChatServer.dir/src/network/socket.cpp.o
+bin/EasyChatServer: CMakeFiles/EasyChatServer.dir/src/network/test.cpp.o
+bin/EasyChatServer: CMakeFiles/EasyChatServer.dir/src/threadpool/theeadpool.cpp.o
+bin/EasyChatServer: CMakeFiles/EasyChatServer.dir/src/database/connection_pool.cpp.o
+bin/EasyChatServer: CMakeFiles/EasyChatServer.dir/src/business/user_manager.cpp.o
+bin/EasyChatServer: CMakeFiles/EasyChatServer.dir/src/business/mesage_handler.cpp.o
+bin/EasyChatServer: CMakeFiles/EasyChatServer.dir/build.make
+bin/EasyChatServer: /usr/lib/x86_64-linux-gnu/libmysqlclient.so
+bin/EasyChatServer: /usr/lib/x86_64-linux-gnu/libcrypto.so
+bin/EasyChatServer: CMakeFiles/EasyChatServer.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cando/EasyChatServer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable bin/EasyChatServer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/EasyChatServer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/EasyChatServer.dir/build: EasyChatServer
+CMakeFiles/EasyChatServer.dir/build: bin/EasyChatServer
 
 .PHONY : CMakeFiles/EasyChatServer.dir/build
 
@@ -93,6 +230,6 @@ CMakeFiles/EasyChatServer.dir/clean:
 .PHONY : CMakeFiles/EasyChatServer.dir/clean
 
 CMakeFiles/EasyChatServer.dir/depend:
-	cd /home/cando/home/cando/Desktop/EasyChatServer/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cando/home/cando/Desktop/EasyChatServer /home/cando/home/cando/Desktop/EasyChatServer /home/cando/home/cando/Desktop/EasyChatServer/cmake-build-debug /home/cando/home/cando/Desktop/EasyChatServer/cmake-build-debug /home/cando/home/cando/Desktop/EasyChatServer/cmake-build-debug/CMakeFiles/EasyChatServer.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cando/EasyChatServer/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cando/EasyChatServer /home/cando/EasyChatServer /home/cando/EasyChatServer/cmake-build-debug /home/cando/EasyChatServer/cmake-build-debug /home/cando/EasyChatServer/cmake-build-debug/CMakeFiles/EasyChatServer.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/EasyChatServer.dir/depend
 

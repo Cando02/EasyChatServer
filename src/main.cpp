@@ -1,25 +1,49 @@
 #include <iostream>
+#include <signal.h>
+#include "network/reactor.h"
+#include "database/connection_pool.h"
+#include "business/user_manager.h"
+#include "business/message_handler.h"
 
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+using namespace easychat;
+
+// 信号处理函数
+void signalHandler(int signum) {
+    std::cout << "Received signal " << signum << ", stopping server..." << std::endl;
+    Reactor::getInstance().stop();
+    exit(signum);
+}
+
 int main() {
-    // TIP Press <shortcut actionId="RenameElement"/> when your caret is at the
-    // <b>lang</b> variable name to see how CLion can help you rename it.
-    auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
+    std::cout << "=== EasyChatServer ===" << std::endl;
 
-    for (int i = 1; i <= 5; i++) {
-        // TIP Press <shortcut actionId="Debug"/> to start debugging your code.
-        // We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/>
-        // breakpoint for you, but you can always add more by pressing
-        // <shortcut actionId="ToggleLineBreakpoint"/>.
-        std::cout << "i = " << i << std::endl;
+    // 注册信号处理
+    signal(SIGINT, signalHandler);    // Ctrl+C
+    signal(SIGTERM, signalHandler);   // 终止信号
+
+    // 初始化数据库连接池
+    std::cout << "Initializing database connection pool..." << std::endl;
+    auto& conn_pool = ConnectionPool::getInstance();
+    if (!conn_pool.init("localhost", 3306, "root", "123456", "easychat", 10)) {
+        std::cerr << "Failed to initialize database connection pool" << std::endl;
+        return 1;
     }
+
+    // 初始化业务模块
+    std::cout << "Initializing business modules..." << std::endl;
+    UserManager::getInstance().init();
+    MessageHandler::getInstance().init();
+
+    // 初始化 Reactor
+    std::cout << "Initializing reactor..." << std::endl;
+    if (!Reactor::getInstance().init("0.0.0.0", 8888, 4)) {
+        std::cerr << "Failed to initialize reactor" << std::endl;
+        return 1;
+    }
+
+    // 启动服务器
+    std::cout << "Starting server..." << std::endl;
+    Reactor::getInstance().start();
 
     return 0;
 }
-
-// TIP See CLion help at <a
-// href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>.
-//  Also, you can try interactive lessons for CLion by selecting
-//  'Help | Learn IDE Features' from the main menu.
