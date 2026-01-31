@@ -34,10 +34,10 @@ namespace easychat{
         // 记录日志
         void log(LogLevel level,const std::string& message);
         //便捷日志方法
-        void debug(const std::string message);
-        void info(const std::string message);
-        void warn(const std::string message);
-        void error(const std::string message);
+        void debug(const std::string& message);
+        void info(const std::string& message);
+        void warn(const std::string& message);
+        void error(const std::string& message);
         // 刷新日志缓冲区
         void flush();
         // 关闭日志系统
@@ -83,7 +83,10 @@ namespace easychat{
     };
 
     //便捷宏定义
-    #define LOG_DEBUG() LogStream(LogLevel::LOG_DEBUG);
+    // 知识点：使用宏简化日志调用，支持流式输出
+    // 注意：使用这些宏前需要 using namespace easychat;
+    // 技巧：使用括号避免宏展开时的命名冲突
+    #define LOG_DEBUG() LogStream(LogLevel::LOG_DEBUG)
     #define LOG_INFO() LogStream(LogLevel::INFO)
     #define LOG_WARN() LogStream(LogLevel::WARN)
     #define LOG_ERROR() LogStream(LogLevel::ERROR)

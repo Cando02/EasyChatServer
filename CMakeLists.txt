@@ -47,7 +47,6 @@ add_executable(EasyChatServer
         ${THREADPOOL_SOURCES}
         ${DATABASE_SOURCES}
         ${BUSINESS_SOURCES}
-        src/common/logger.cpp
 )
 
 target_link_libraries(EasyChatServer
