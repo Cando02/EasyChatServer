@@ -130,6 +130,7 @@ namespace easychat{
         //写入当前进程PID
         file <<getpid();
         file.close();
+        return true;
     }
 
     bool Daemon::removePidFile(const std::string &pid_file) {

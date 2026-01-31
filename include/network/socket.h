@@ -1,5 +1,5 @@
 //
-// Created by Cando on 2026/1/29.
+// Created by 30501 on 2026/1/29.
 //
 
 #ifndef EASYCHATSERVER_SOCKET_H
@@ -7,12 +7,13 @@
 
 #include<string>
 #include <memory>
+
 namespace easychat{
     // socket封装类
-    class Socket{;
+    class Socket{
     public:
         Socket();
-        explicit Socket(int fd);
+        explicit Socket(int fd, bool owns_fd = true);
         ~Socket();
 
         // 禁止拷贝，允许移动
@@ -41,8 +42,11 @@ namespace easychat{
         int getFd() const {return fd_; }
         // 获取Socket错误
         int getSocketError() const;
+        // 释放文件描述符所有权
+        void releaseOwnership() { owns_fd_ = false; }
     private:
         int fd_;
+        bool owns_fd_;  // 是否拥有文件描述符
     };
 }
 

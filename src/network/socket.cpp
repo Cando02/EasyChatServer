@@ -11,7 +11,7 @@
 #include <iostream>
 
 namespace easychat{
-    Socket::Socket() : fd_(-1){
+    Socket::Socket() : fd_(-1), owns_fd_(true){
         // 创建Socket
         // AF_INET: IPv4 地址族
         // SOCK_STREAM: 面向连接的 TCP 套接字
@@ -22,17 +22,26 @@ namespace easychat{
             std::cerr << "Failed to create socket: " << strerror(errno) << std::endl;
         }
     }
-    Socket::Socket(int fd) : fd_(fd) {}
-    Socket::~Socket(){close();}
-    Socket::Socket(Socket&& other) noexcept : fd_(other.fd_){
-        other.fd_=-1;
+    Socket::Socket(int fd, bool owns_fd) : fd_(fd), owns_fd_(owns_fd) {}
+    Socket::~Socket(){
+        if (owns_fd_){
+            close();
+        }
+    }
+    Socket::Socket(Socket&& other) noexcept : fd_(other.fd_), owns_fd_(other.owns_fd_){
+        other.fd_ = -1;
+        other.owns_fd_ = false;
     }
 
     Socket &Socket::operator=(easychat::Socket &&other) noexcept {
         if (this!=&other){
-            close();
+            if (owns_fd_){
+                close();
+            }
             fd_ = other.fd_;
+            owns_fd_ = other.owns_fd_;
             other.fd_ = -1;
+            other.owns_fd_ = false;
         }
         return *this;
     }
@@ -86,7 +95,7 @@ namespace easychat{
         // 打印客户端信息
         std::cout<<"New connection from "<<inet_ntoa(client_addr.sin_addr)
         <<":"<<ntohs(client_addr.sin_port)<<std::endl;
-        return std::make_unique<Socket>(client_fd);
+        return std::make_unique<Socket>(client_fd, true); // 新创建的Socket拥有文件描述符
     }
     bool Socket::connect(const std::string &ip, uint16_t port) {
         if (fd_==-1){return false;}
@@ -118,14 +127,25 @@ namespace easychat{
     }
     ssize_t Socket::send(const char *data, size_t length) {
         if (fd_==-1) return -1;
-        // 发送数据
-        ssize_t bytes = ::send(fd_,data,length,0);
-        if (bytes==-1){
-            if (errno!=EAGAIN && errno!=EWOULDBLOCK){
-                std::cerr<<"Failed to send data: "<<strerror(errno)<<std::endl;
+        // 发送数据（处理非阻塞模式）
+        size_t total_sent = 0;
+        while (total_sent < length) {
+            ssize_t bytes = ::send(fd_, data + total_sent, length - total_sent, 0);
+            if (bytes == -1) {
+                if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                    // 缓冲区满，继续尝试
+                    continue;
+                } else {
+                    std::cerr<<"Failed to send data: "<<strerror(errno)<<std::endl;
+                    return -1;
+                }
+            } else if (bytes == 0) {
+                // 连接关闭
+                return -1;
             }
+            total_sent += bytes;
         }
-        return bytes;
+        return total_sent;
     }
     bool Socket::setNonBlocking() {
         if (fd_==-1) return false;
@@ -143,7 +163,7 @@ namespace easychat{
         return true;
     }
     void Socket::close() {
-        if (fd_==-1){
+        if (fd_!=-1){
             ::close(fd_);
             fd_ = -1;
         }

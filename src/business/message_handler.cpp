@@ -32,8 +32,10 @@ namespace easychat{
                 +std::to_string(message_type)+", "+std::to_string(is_offline)+")";
         if (!conn->execute(insert_sql)){
             std::cerr<<"Failed to store message"<<std::endl;
+            conn_pool_.returnConnection(conn);
             return false;
         }
+        conn_pool_.returnConnection(conn);
         return true;
     }
 
@@ -43,8 +45,8 @@ namespace easychat{
         if (socket_fd==-1) return false;
         // 序列化消息
         auto buffer = msg.serialize();
-        // 创造Socket对象并发送信息
-        Socket socket(socket_fd);
+        // 创造Socket对象并发送信息，不拥有文件描述符
+        Socket socket(socket_fd, false);
         ssize_t bytes_sent = socket.send(buffer.data(),buffer.size());
 
         if(bytes_sent==-1){
@@ -84,7 +86,7 @@ namespace easychat{
         std::string message_content = content.substr(colon_pos+1);
 
         // 发送消息
-        sendMessage(sender_id,receiver_id,message_content);
+        sendMessage(sender_id,receiver_id,message_content,static_cast<int>(msg.getType()));
     }
     bool MessageHandler::getOfflineMessage(int user_id, std::vector<MessageInfo> &messages) {
         auto conn = conn_pool_.getConnection();
@@ -93,7 +95,10 @@ namespace easychat{
         std::string query_sql = "select id,sender_id,receiver_id,content,message_type,is_offline,is_read,created_at "
                                 "from messages where receiver_id="+std::to_string(user_id)+" and is_offline=1 order by created_at asc";
         MYSQL_RES* result = conn->query(query_sql);
-        if (!result) return false;
+        if (!result) {
+            conn_pool_.returnConnection(conn);
+            return false;
+        }
         MYSQL_ROW row;
         while ((row= mysql_fetch_row(result))!= nullptr){
             MessageInfo msg_info;
@@ -113,6 +118,7 @@ namespace easychat{
                 +std::to_string(user_id)+" and is_offline=1";
         conn->execute(update_sql);
 
+        conn_pool_.returnConnection(conn);
         return true;
     }
 
@@ -121,7 +127,9 @@ namespace easychat{
         if (!conn || !conn->isConnected()) return false;
 
         std::string update_sql = "update messages set is_read = 1 where id= "+std::to_string(message_id);
-        return conn->execute(update_sql);
+        bool result = conn->execute(update_sql);
+        conn_pool_.returnConnection(conn);
+        return result;
     }
     bool MessageHandler::getChatHistory(int user_id1, int user_id2, std::vector<MessageInfo> &messages, int limit) {
         auto conn = conn_pool_.getConnection();
@@ -131,7 +139,10 @@ namespace easychat{
                                 "or (sender_id="+std::to_string(user_id2)+" and receiver_id = "+std::to_string(user_id1)+") "
                                 "order by created_at desc limit "+std::to_string(limit);
         MYSQL_RES *result = conn->query(query_sql);
-        if (!result) return false;
+        if (!result) {
+            conn_pool_.returnConnection(conn);
+            return false;
+        }
         MYSQL_ROW row;
         while ((row= mysql_fetch_row(result))!= nullptr){
             MessageInfo msg_info;
@@ -146,6 +157,7 @@ namespace easychat{
             messages.push_back(msg_info);
         }
         mysql_free_result(result);
+        conn_pool_.returnConnection(conn);
         return true;
     }
 }

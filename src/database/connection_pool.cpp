@@ -47,6 +47,7 @@ namespace easychat {
         // 执行SQL语句
         if (mysql_query(mysql_,sql.c_str())!=0){
             std::cerr<<"Failed to execute SQL: "<<mysql_error(mysql_)<<std::endl;
+            return false;
         }
         return true;
     }

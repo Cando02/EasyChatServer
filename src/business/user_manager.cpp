@@ -46,6 +46,7 @@ namespace easychat{
         if (result && mysql_num_rows(result)>0){
             mysql_free_result(result);
             std::cerr<<"Username already exists: "<<username<<std::endl;
+            conn_pool_.returnConnection(conn);
             return false;
         }
         if (result){
@@ -54,12 +55,14 @@ namespace easychat{
         // 加密密码
         std::string encrypted_pwd = encryptPassword(password);
         // 插入新用户
-        std::string insert_sql = "insert into user (username,password,nickname) values('"+username+"','"+encrypted_pwd+"','"+nickname+"'";
+        std::string insert_sql = "insert into users (username,password,nickname) values('"+username+"','"+encrypted_pwd+"','"+nickname+"')";
         if (!conn->execute(insert_sql)){
             std::cerr<<"Failed to register user: "<<username<<std::endl;
+            conn_pool_.returnConnection(conn);
             return false;
         }
         std::cout<<"User registered successfully: "<<username<<std::endl;
+        conn_pool_.returnConnection(conn);
         return true;
     }
 
@@ -80,12 +83,14 @@ namespace easychat{
                 mysql_free_result(result);
             }
             std::cerr<<"Login failed: invalid username or password"<<std::endl;
+            conn_pool_.returnConnection(conn);
             return false;
         }
         // 获取用户ID
         MYSQL_ROW row = mysql_fetch_row(result);
         user_id = std::stoi(row[0]);
         mysql_free_result(result);
+        conn_pool_.returnConnection(conn);
         // 更新用户状态为在线
         updateUserStatus(user_id, 1);
         std::cout<<"User logged in successfully: "<<username<<"(ID:"<<user_id<<")"<<std::endl;
@@ -98,6 +103,7 @@ namespace easychat{
         MYSQL_RES *result = conn->query(query_sql);
         if (!result|| mysql_num_rows(result)==0){
             if (result) mysql_free_result(result);
+            conn_pool_.returnConnection(conn);
             return false;
         }
         MYSQL_ROW row = mysql_fetch_row(result);
@@ -108,6 +114,7 @@ namespace easychat{
         user_info.avatar = row[4] ? row[4] : "";
         user_info.status = std::stoi(row[5]);
         mysql_free_result(result);
+        conn_pool_.returnConnection(conn);
         return true;
     }
 
@@ -118,6 +125,7 @@ namespace easychat{
         MYSQL_RES *result = conn->query(query_sql);
         if (!result|| mysql_num_rows(result)==0){
             if (result) mysql_free_result(result);
+            conn_pool_.returnConnection(conn);
             return false;
         }
         MYSQL_ROW row = mysql_fetch_row(result);
@@ -128,6 +136,7 @@ namespace easychat{
         user_info.avatar = row[4] ? row[4] : "";
         user_info.status = std::stoi(row[5]);
         mysql_free_result(result);
+        conn_pool_.returnConnection(conn);
         return true;
     }
 
@@ -135,10 +144,9 @@ namespace easychat{
         auto conn = conn_pool_.getConnection();
         if (!conn || !conn->isConnected()) return false;
         std::string update_sql = "update users set status="+std::to_string(status)+" where id="+std::to_string(user_id);
-        if (!conn->execute(update_sql)){
-            return false;
-        }
-        return true;
+        bool result = conn->execute(update_sql);
+        conn_pool_.returnConnection(conn);
+        return result;
     }
 
     bool UserManager::userOnline(int user_id, int socket_fd, const std::string &ip, int port) {
@@ -154,8 +162,9 @@ namespace easychat{
         if (!conn || !conn->isConnected()) return false;
 
         std::string insert_sql = "insert ignore into online_users(user_id,socket_fd,ip,port) values("
-                +std::to_string(user_id)+", "+std::to_string(socket_fd)+", "+ip+", "+std::to_string(port)+")";
+                +std::to_string(user_id)+", "+std::to_string(socket_fd)+", '"+ip+"', "+std::to_string(port)+")";
         conn->execute(insert_sql);
+        conn_pool_.returnConnection(conn);
         std::cout<<"User online: ID="<<user_id<<", SocketFd="<<socket_fd<<std::endl;
         return true;
     }
@@ -173,6 +182,7 @@ namespace easychat{
         if (!conn || !conn->isConnected()) return false;
         std::string delete_sql = "delete from online_users where user_id = "+std::to_string(user_id);
         conn->execute(delete_sql);
+        conn_pool_.returnConnection(conn);
 
         std::cout<<"User offline ID="<<user_id<<std::endl;
         return true;
@@ -189,7 +199,10 @@ namespace easychat{
 
         std::string query_sql = "select id from online_users";
         MYSQL_RES *result = conn->query(query_sql);
-        if (!result) return online_users;
+        if (!result) {
+            conn_pool_.returnConnection(conn);
+            return online_users;
+        }
 
         MYSQL_ROW row;
         while ((row= mysql_fetch_row(result))!= nullptr){
@@ -200,6 +213,7 @@ namespace easychat{
             }
         }
         mysql_free_result(result);
+        conn_pool_.returnConnection(conn);
         return online_users;
     }
 

@@ -9,7 +9,7 @@
 
 namespace easychat{
     ClientConnection::ClientConnection(int fd, const std::string &ip, int port)
-    :fd_(fd),ip_(ip),port_(port),user_id_(-1),socket_(fd){
+    :fd_(fd),ip_(ip),port_(port),user_id_(-1),socket_(fd, true){ // 明确拥有文件描述符
         // 设置Socket为非阻塞模式
         socket_.setNonBlocking();
         std::cout<<"New client connected: "<<ip_<<":"<<port_<<", FD: "<<fd_<<std::endl;
@@ -23,6 +23,12 @@ namespace easychat{
         // 读取数据（非阻塞模式）
         while ((bytes_read= socket_.recv(buf,sizeof (buf)))>0){
             buffer_.append(buf,bytes_read);
+        }
+        // 处理连接关闭的情况
+        if (bytes_read == 0) {
+            std::cout<<"Client closed connection: FD="<<fd_<<std::endl;
+            handleClose();
+            return;
         }
         if (bytes_read==-1 && errno!=EAGAIN && errno!=EWOULDBLOCK){
             std::cerr<<"Error reading from client "<<fd_<<": "<<strerror(errno)<<std::endl;
@@ -68,40 +74,40 @@ namespace easychat{
                                     Message offline_msg(MessageType::MSG_TYPE_OFFLINE_MSG,msg_info.sender_id,msg_info.content);
                                     sendMessage(offline_msg);
                                 }
-                            }else{
-                                //登陆失败
-                                Message resp_msg(MessageType::MSG_TYPE_ERROR,-1,"Login failed");
-                                sendMessage(resp_msg);
                             }
-                        }
-                    }else if (msg.getType()==MessageType::MSG_TYPE_REGISTER){
-                        // 处理注册
-                        std::string data = msg.getData();
-                        size_t colon_pos = data.find(':');
-                        if (colon_pos!=std::string::npos){
-                            std::string username = data.substr(0,colon_pos);
-                            std::string password = data.substr(colon_pos+1);
-                            if (UserManager::getInstance().registerUser(username,password)){
-                                //注册成功
-                                Message resp_msg(MessageType::MSG_TYPE_REGISTER_RESP,-1,"Register successful");
-                                sendMessage(resp_msg);
-                            }else{
-                                // 注册失败
-                                Message resp_msg(MessageType::MSG_TYPE_ERROR,-1,"Register failed");
-                                sendMessage(resp_msg);
-                            }
+                        }else{
+                            //登陆失败
+                            Message resp_msg(MessageType::MSG_TYPE_ERROR,-1,"Login failed");
+                            sendMessage(resp_msg);
                         }
                     }
-                }else{
-                    // 已认证连接，处理其他消息
-                    if (msg.getType()==MessageType::MSG_TYPE_CHAT){
-                        // 处理聊天消息
-                        MessageHandler::getInstance().handleReceivedMessage(msg);
-                    }else if (msg.getType()==MessageType::MSG_TYPE_HEARTBEAT){
-                        // 处理心跳消息
-                        Message resp_msg(MessageType::MSG_TYPE_HEARTBEAT,user_id_,"Pong");
-                        sendMessage(resp_msg);
+                }else if (msg.getType()==MessageType::MSG_TYPE_REGISTER){
+                    // 处理注册
+                    std::string data = msg.getData();
+                    size_t colon_pos = data.find(':');
+                    if (colon_pos!=std::string::npos){
+                        std::string username = data.substr(0,colon_pos);
+                        std::string password = data.substr(colon_pos+1);
+                        if (UserManager::getInstance().registerUser(username,password)){
+                            //注册成功
+                            Message resp_msg(MessageType::MSG_TYPE_REGISTER_RESP,-1,"Register successful");
+                            sendMessage(resp_msg);
+                        }else{
+                            // 注册失败
+                            Message resp_msg(MessageType::MSG_TYPE_ERROR,-1,"Register failed");
+                            sendMessage(resp_msg);
+                        }
                     }
+                }
+            }else{
+                // 已认证连接，处理其他消息
+                if (msg.getType()==MessageType::MSG_TYPE_CHAT){
+                    // 处理聊天消息
+                    MessageHandler::getInstance().handleReceivedMessage(msg);
+                }else if (msg.getType()==MessageType::MSG_TYPE_HEARTBEAT){
+                    // 处理心跳消息
+                    Message resp_msg(MessageType::MSG_TYPE_HEARTBEAT,user_id_,"Pong");
+                    sendMessage(resp_msg);
                 }
             }
             // 从缓存区中移除已处理的消息
@@ -221,10 +227,17 @@ namespace easychat{
             std::string client_ip = inet_ntoa(client_addr.sin_addr);
             int client_port = ntohs(client_addr.sin_port);
 
+            // 提取文件描述符并确保client_socket不会关闭它
+            int client_fd = client_socket->getFd();
+            client_socket->releaseOwnership(); // 释放文件描述符所有权
+            
             // 创建客户端连接
             auto conn = std::make_unique<ClientConnection>(
-                    client_socket->getFd(),client_ip,client_port
+                    client_fd,client_ip,client_port
                     );
+            
+            // 释放client_socket
+            client_socket.reset();
             // 注册客户端连接
             registerClientConnection(std::move(conn));
         }
