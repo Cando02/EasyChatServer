@@ -1,0 +1,6 @@
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/usr/bin/make -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ -DCMAKE_PREFIX_PATH=/usr/include/mysql -G "CodeBlocks - Unix Makefiles" -S /home/cando/EasyChatServer -B /home/cando/EasyChatServer/cmake-build-debug
+-- Found MySQL library: /usr/lib/x86_64-linux-gnu/libmysqlclient.so
+-- Found MySQL include directory: /usr/include
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/cando/EasyChatServer/cmake-build-debug

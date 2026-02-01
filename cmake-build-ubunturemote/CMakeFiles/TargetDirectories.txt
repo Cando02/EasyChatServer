@@ -1,0 +1,7 @@
+/home/cando/EasyChatServer/cmake-build-ubunturemote/CMakeFiles/install/strip.dir
+/home/cando/EasyChatServer/cmake-build-ubunturemote/CMakeFiles/install/local.dir
+/home/cando/EasyChatServer/cmake-build-ubunturemote/CMakeFiles/install.dir
+/home/cando/EasyChatServer/cmake-build-ubunturemote/CMakeFiles/list_install_components.dir
+/home/cando/EasyChatServer/cmake-build-ubunturemote/CMakeFiles/rebuild_cache.dir
+/home/cando/EasyChatServer/cmake-build-ubunturemote/CMakeFiles/edit_cache.dir
+/home/cando/EasyChatServer/cmake-build-ubunturemote/CMakeFiles/EasyChatServer.dir

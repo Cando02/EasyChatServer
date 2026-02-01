@@ -1,0 +1,121 @@
+=== EasyChatServer ===
+Loading config file: config/server.conf
+Config loaded from: config/server.conf
+Config loaded successfully
+Initializing logger...
+Log file: logs/server.log
+Log level: INFO
+Logger initialized, level: INFO, file: logs/server.log
+Logger initialized successfully
+[2026-02-01 12:54:55.050][INFO][140347912509248]EasyChatServer starting...
+[2026-02-01 12:54:55.050][INFO][140347912509248]Config file: config/server.conf
+[2026-02-01 12:54:55.050][INFO][140347912509248]Initializing signal handlers...
+Signal handlers initialized
+[2026-02-01 12:54:55.050][INFO][140347912509248]Signal handlers initialized successfully
+[2026-02-01 12:54:55.050][INFO][140347912509248]Initializing database connection pool...
+[2026-02-01 12:54:55.050][INFO][140347912509248]Database config: localhost:3306, user: root, db: easychat
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+MySQL connection established
+Connection pool initialized with20 connections
+[2026-02-01 12:54:55.218][INFO][140347912509248]Database connection pool initialized successfully
+[2026-02-01 12:54:55.218][INFO][140347912509248]Initializing business modules...
+UserManager initialized
+MessageHandler initialized
+[2026-02-01 12:54:55.218][INFO][140347912509248]Business modules initialized successfully
+[2026-02-01 12:54:55.218][INFO][140347912509248]Initializing reactor...
+[2026-02-01 12:54:55.218][INFO][140347912509248]Server config: 0.0.0.0:8888, thread pool size: 4
+ThreadPool created with: 4 threads
+Reactor initialized, listening on 0.0.0.0:8888
+[2026-02-01 12:54:55.219][INFO][140347912509248]Reactor initialized successfully
+[2026-02-01 12:54:55.219][INFO][140347912509248]Starting server on 0.0.0.0:8888
+Server starting on 0.0.0.0:8888
+Reactor starting...
+New connection from 127.0.0.1:33620
+New client connected: 127.0.0.1:33620, FD: 26
+Client connection registered: FD=26
+Connection closed by peer
+Client closed connection: FD=26
+New connection from 127.0.0.1:33636
+New client connected: 127.0.0.1:33636, FD: 26
+Client disconnected: 127.0.0.1: 33620, FD: 26
+Client connection registered: FD=26
+Connection closed by peer
+Client closed connection: FD=26
+New connection from 127.0.0.1:37534
+New client connected: 127.0.0.1:37534, FD: 26
+Client disconnected: 127.0.0.1: 33636, FD: 26
+Client connection registered: FD=26
+Connection closed by peer
+Client closed connection: FD=26
+New connection from 127.0.0.1:37542
+New client connected: 127.0.0.1:37542, FD: 26
+Client disconnected: 127.0.0.1: 37534, FD: 26
+Client connection registered: FD=26
+Connection closed by peer
+Client closed connection: FD=26
+New connection from 127.0.0.1:42782
+New client connected: 127.0.0.1:42782, FD: 26
+Client disconnected: 127.0.0.1: 37542, FD: 26
+Client connection registered: FD=26
+Connection closed by peer
+Client closed connection: FD=26
+New connection from 127.0.0.1:42798
+New client connected: 127.0.0.1:42798, FD: 26
+Client disconnected: 127.0.0.1: 42782, FD: 26
+Client connection registered: FD=26
+Connection closed by peer
+Client closed connection: FD=26
+New connection from 127.0.0.1:34862
+New client connected: 127.0.0.1:34862, FD: 26
+Client disconnected: 127.0.0.1: 42798, FD: 26
+Client connection registered: FD=26
+Connection closed by peer
+Client closed connection: FD=26
+New connection from 127.0.0.1:34876
+New client connected: 127.0.0.1:34876, FD: 26
+Client disconnected: 127.0.0.1: 34862, FD: 26
+Client connection registered: FD=26
+Connection closed by peer
+Client closed connection: FD=26
+New connection from 127.0.0.1:35492
+New client connected: 127.0.0.1:35492, FD: 26
+Client disconnected: 127.0.0.1: 34876, FD: 26
+Client connection registered: FD=26
+Connection closed by peer
+Client closed connection: FD=26
+New connection from 127.0.0.1:35508
+New client connected: 127.0.0.1:35508, FD: 26
+Client disconnected: 127.0.0.1: 35492, FD: 26
+Client connection registered: FD=26
+Connection closed by peer
+Client closed connection: FD=26
+New connection from 127.0.0.1:45934
+New client connected: 127.0.0.1:45934, FD: 26
+Client disconnected: 127.0.0.1: 35508, FD: 26
+Client connection registered: FD=26
+Connection closed by peer
+Client closed connection: FD=26
+New connection from 127.0.0.1:45946
+New client connected: 127.0.0.1:45946, FD: 26
+Client disconnected: 127.0.0.1: 45934, FD: 26
+Client connection registered: FD=26
+Connection closed by peer
+Client closed connection: FD=26
