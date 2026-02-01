@@ -99,6 +99,62 @@ namespace easychat{
                         }
                     }
                 }
+            }else if (msg.getType() == MessageType::MSG_TYPE_HISTORY) {
+                // 处理获取聊天记录请求
+                std::string data = msg.getData();
+                size_t colon_pos = data.find(':');
+                if (colon_pos != std::string::npos) {
+                    int user_id2 = std::stoi(data.substr(0, colon_pos));
+                    int limit = std::stoi(data.substr(colon_pos + 1));
+
+                    // 获取聊天记录
+                    std::vector<MessageInfo> history;
+                    if (MessageHandler::getInstance().getChatHistory(user_id_, user_id2, history, limit)) {
+                        // 构建聊天记录字符串（格式：sender_id:content|sender_id:content|...）
+                        std::string history_str = "";
+                        for (const auto& msg_info : history) {
+                            if (!history_str.empty()) {
+                                history_str += "|";
+                            }
+                            history_str += std::to_string(msg_info.sender_id) + ":" + msg_info.content;
+                        }
+                        // 发送聊天记录
+                        Message history_msg(MessageType::MSG_TYPE_HISTORY_RESP, user_id_, history_str);
+                        sendMessage(history_msg);
+                        std::cout << "发送聊天记录: " << history_str << std::endl;
+                    }
+                }
+            }else if (msg.getType() == MessageType::MSG_TYPE_GET_USERS) {
+                // 处理获取在线用户请求
+                auto online_users = UserManager::getInstance().getOnlineUsers();
+                // 构建在线用户列表字符串（格式：user_id:username,user_id:username,...）
+                std::string users_list = "";
+                for (const auto& [user_id, user_info] : online_users) {
+                    if (!users_list.empty()) {
+                        users_list += ",";
+                    }
+                    users_list += std::to_string(user_id) + ":" + user_info.username;
+                }
+                // 发送在线用户列表
+                Message user_msg(MessageType::MSG_TYPE_USERS_RESP, user_id_, users_list);
+                sendMessage(user_msg);
+                std::cout << "发送在线用户列表: " << users_list << std::endl;
+            }else if (msg.getType() == MessageType::MSG_TYPE_GET_USER_BY_NAME) {
+                // 处理根据用户名获取用户信息请求
+                std::string username = msg.getData();
+                easychat::UserInfo user_info;
+                if (UserManager::getInstance().getUserInfo(username, user_info)) {
+                    // 找到用户，返回用户信息
+                    std::string user_data = std::to_string(user_info.id) + ":" + user_info.username;
+                    Message user_msg(MessageType::MSG_TYPE_GET_USER_BY_NAME_RESP, user_info.id, user_data);
+                    sendMessage(user_msg);
+                    std::cout << "发送用户信息响应: " << user_data << std::endl;
+                } else {
+                    // 未找到用户，返回空响应
+                    Message user_msg(MessageType::MSG_TYPE_GET_USER_BY_NAME_RESP, -1, "");
+                    sendMessage(user_msg);
+                    std::cout << "未找到用户: " << username << std::endl;
+                }
             }else{
                 // 已认证连接，处理其他消息
                 if (msg.getType()==MessageType::MSG_TYPE_CHAT){

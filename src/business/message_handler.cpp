@@ -134,7 +134,7 @@ namespace easychat{
     bool MessageHandler::getChatHistory(int user_id1, int user_id2, std::vector<MessageInfo> &messages, int limit) {
         auto conn = conn_pool_.getConnection();
         if (!conn || !conn->isConnected()) return false;
-        std::string query_sql = "select id,sender_id,receiver_id,content,message_type,is_offline,is_read,created_at"
+        std::string query_sql = "select id,sender_id,receiver_id,content,message_type,is_offline,is_read,created_at "
                                 "from messages where (sender_id="+std::to_string(user_id1)+" and receiver_id = "+std::to_string(user_id2)+") "
                                 "or (sender_id="+std::to_string(user_id2)+" and receiver_id = "+std::to_string(user_id1)+") "
                                 "order by created_at desc limit "+std::to_string(limit);

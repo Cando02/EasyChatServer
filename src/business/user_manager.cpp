@@ -197,7 +197,7 @@ namespace easychat{
         auto conn = conn_pool_.getConnection();
         if (!conn || !conn->isConnected()) return online_users;
 
-        std::string query_sql = "select id from online_users";
+        std::string query_sql = "select user_id from online_users";
         MYSQL_RES *result = conn->query(query_sql);
         if (!result) {
             conn_pool_.returnConnection(conn);

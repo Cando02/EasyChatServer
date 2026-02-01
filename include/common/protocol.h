@@ -22,6 +22,12 @@ namespace easychat {
         MSG_TYPE_OFFLINE_MSG, // 离线消息推送
         MSG_TYPE_HEARTBEAT, // 心跳消息
         MSG_TYPE_ERROR, // 错误消息
+        MSG_TYPE_HISTORY,        // 获取聊天记录
+        MSG_TYPE_GET_USERS,      // 获取在线用户
+        MSG_TYPE_HISTORY_RESP,    // 聊天记录响应
+        MSG_TYPE_USERS_RESP,      // 在线用户响应
+        MSG_TYPE_GET_USER_BY_NAME,  // 根据用户名获取用户信息
+        MSG_TYPE_GET_USER_BY_NAME_RESP  // 根据用户名获取用户信息响应
     };
 // 消息头部结构（固定12字节）
 #pragma pack(push ,1)
