@@ -88,5 +88,5 @@ def test_concurrent_connections(count):
 if __name__ == "__main__":
     # 测试不同并发连接数
     test_concurrent_connections(100)  # 100个并发连接
-    # test_concurrent_connections(500)  # 500个并发连接
-    # test_concurrent_connections(1000)  # 1000个并发连接
+    test_concurrent_connections(500)  # 500个并发连接
+    test_concurrent_connections(1000)  # 1000个并发连接

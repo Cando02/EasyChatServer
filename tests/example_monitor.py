@@ -2,7 +2,12 @@
 监控使用示例
 """
 import time
-from monitor import ServerMonitor
+import sys
+import os
+
+# 添加父目录到Python路径
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from python.monitor import ServerMonitor
 
 def main():
     # 创建监控器

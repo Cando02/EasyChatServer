@@ -3,7 +3,12 @@
 测试所有客户端功能
 """
 import time
-from client import EasyChatClient
+import sys
+import os
+
+# 添加父目录到Python路径
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from python.client import EasyChatClient
 
 def main():
     # 创建客户端
