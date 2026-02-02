@@ -534,5 +534,5 @@ A: 直接使用 `send username message` 命令，客户端会自动将用户名�
 MIT License
 
 ## 联系方式
-- 项目地址：[GitHub](https://github.com/yourusername/EasyChatServer)
-- 邮箱：your.email@example.com
+- 项目地址：[GitHub](https://github.com/Cando02/EasyChatServer)
+- 邮箱：3050161881@qq.com
